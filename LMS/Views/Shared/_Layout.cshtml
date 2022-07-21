@@ -1,0 +1,55 @@
+﻿
+<style>
+    @*body {
+        background-image: url('~/images/pic1.jfif');
+        background-size:cover;
+        background-repeat:no-repeat;
+    }*@
+</style>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Library Management System </title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+   @* <img src="~/images/pic1.jfif" alt="Alternate Text" />*@
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("LOGIN-Page", "log", "management", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                  
+                    <li>@Html.ActionLink("Librarians", "Index", "management")</li>
+                    <li>@Html.ActionLink("Books", "Index", "book")</li>
+                    <li>@Html.ActionLink("Students", "Index", "student")</li>
+                    <li>@Html.ActionLink("Allocation", "Index", "allocation")</li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - LMS</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

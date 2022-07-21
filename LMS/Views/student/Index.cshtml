@@ -1,0 +1,45 @@
+﻿@model IEnumerable<LMS.Models.student>
+
+
+@using (Html.BeginForm())
+{
+
+    <td>
+        @Html.Label("Search :")
+    </td>
+    <td>
+        @Html.TextBox("search")
+    </td>
+    <td>
+        <input type="submit" value="Search" />
+    </td>
+}
+
+<table border="1" width="1000px">
+
+    <tr>
+        <th>ID:</th>
+        <th>Name:</th>
+        <th>Roll-No:</th>
+        <th>E-Mail:</th>
+    </tr>
+    @{
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.student_id</td>
+                <td>@item.name</td>
+                <td>@item.roll_no</td>
+                <td>@item.email</td>
+
+
+                <td>@Html.ActionLink("Edit", "edit", new { id = item.student_id })</td>
+                <td>@Html.ActionLink("Delete", "delete", new { id = item.student_id })</td>
+                <td>@Html.ActionLink("Detail", "detail", new { id = item.student_id })</td>
+            </tr>
+        }
+    }
+</table>
+<button>@Html.ActionLink("Create", "create")</button>
+<br>
+<button>@Html.ActionLink("Logout", "logout")</button>

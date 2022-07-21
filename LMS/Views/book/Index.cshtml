@@ -1,0 +1,46 @@
+﻿@model IEnumerable<LMS.Models.book>
+<table border="1" width="1000px">
+
+    <tr>
+        @using (Html.BeginForm())
+        {
+
+            <td>
+                @Html.Label("Search :")
+            </td>
+            <td>
+                @Html.TextBox("search")
+            </td>
+            <td>
+                <input type="submit" value="Search" />
+            </td>
+        }
+
+
+    </tr>
+    <tr>
+        <th>ID:</th>
+        <th>Book-Name:</th>
+        <th>Author-Name:</th>
+
+    </tr>
+    @{
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.book_id</td>
+                <td>@item.book_name</td>
+                <td>@item.author_name</td>
+
+
+                <td>@Html.ActionLink("Edit", "edit", new { id = item.book_id })</td>
+                <td>@Html.ActionLink("Delete", "delete", new { id = item.book_id })</td>
+                <td>@Html.ActionLink("Detail", "detail", new { id = item.book_id })</td>
+            </tr>
+        }
+    }
+
+</table>
+<button>@Html.ActionLink("Create", "create")</button>
+<br>
+<button>@Html.ActionLink("Logout", "logout")</button>

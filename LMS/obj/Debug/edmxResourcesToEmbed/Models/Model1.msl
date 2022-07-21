@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="LMSModelStoreContainer" CdmEntityContainer="LMSEntities">
+    <EntitySetMapping Name="allocations">
+      <EntityTypeMapping TypeName="LMSModel.allocation">
+        <MappingFragment StoreEntitySet="allocation">
+          <ScalarProperty Name="allocation_id" ColumnName="allocation_id" />
+          <ScalarProperty Name="management_id" ColumnName="management_id" />
+          <ScalarProperty Name="student_id" ColumnName="student_id" />
+          <ScalarProperty Name="book_id" ColumnName="book_id" />
+          <ScalarProperty Name="allocation_date" ColumnName="allocation_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="books">
+      <EntityTypeMapping TypeName="LMSModel.book">
+        <MappingFragment StoreEntitySet="book">
+          <ScalarProperty Name="book_id" ColumnName="book_id" />
+          <ScalarProperty Name="book_name" ColumnName="book_name" />
+          <ScalarProperty Name="author_name" ColumnName="author_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="managements">
+      <EntityTypeMapping TypeName="LMSModel.management">
+        <MappingFragment StoreEntitySet="management">
+          <ScalarProperty Name="management_id" ColumnName="management_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="phone_no" ColumnName="phone_no" />
+          <ScalarProperty Name="user_name" ColumnName="user_name" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="confirm_password" ColumnName="confirm_password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="students">
+      <EntityTypeMapping TypeName="LMSModel.student">
+        <MappingFragment StoreEntitySet="student">
+          <ScalarProperty Name="student_id" ColumnName="student_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="roll_no" ColumnName="roll_no" />
+          <ScalarProperty Name="email" ColumnName="email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

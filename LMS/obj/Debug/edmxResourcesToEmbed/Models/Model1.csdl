@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="allocation">
+    <Key>
+      <PropertyRef Name="allocation_id" />
+    </Key>
+    <Property Name="allocation_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="management_id" Type="Int32" Nullable="false" />
+    <Property Name="student_id" Type="Int32" Nullable="false" />
+    <Property Name="book_id" Type="Int32" Nullable="false" />
+    <Property Name="allocation_date" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="book" Relationship="Self.FK_allocation_book" FromRole="allocation" ToRole="book" />
+    <NavigationProperty Name="management" Relationship="Self.FK_allocation_management" FromRole="allocation" ToRole="management" />
+    <NavigationProperty Name="student" Relationship="Self.FK_allocation_student" FromRole="allocation" ToRole="student" />
+  </EntityType>
+  <EntityType Name="book">
+    <Key>
+      <PropertyRef Name="book_id" />
+    </Key>
+    <Property Name="book_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="book_name" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="author_name" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="allocations" Relationship="Self.FK_allocation_book" FromRole="book" ToRole="allocation" />
+  </EntityType>
+  <EntityType Name="management">
+    <Key>
+      <PropertyRef Name="management_id" />
+    </Key>
+    <Property Name="management_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="email" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="phone_no" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="user_name" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="password" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="confirm_password" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="allocations" Relationship="Self.FK_allocation_management" FromRole="management" ToRole="allocation" />
+  </EntityType>
+  <EntityType Name="student">
+    <Key>
+      <PropertyRef Name="student_id" />
+    </Key>
+    <Property Name="student_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="roll_no" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="email" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="allocations" Relationship="Self.FK_allocation_student" FromRole="student" ToRole="allocation" />
+  </EntityType>
+  <Association Name="FK_allocation_book">
+    <End Role="book" Type="Self.book" Multiplicity="1" />
+    <End Role="allocation" Type="Self.allocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="book">
+        <PropertyRef Name="book_id" />
+      </Principal>
+      <Dependent Role="allocation">
+        <PropertyRef Name="book_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_allocation_management">
+    <End Role="management" Type="Self.management" Multiplicity="1" />
+    <End Role="allocation" Type="Self.allocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="management">
+        <PropertyRef Name="management_id" />
+      </Principal>
+      <Dependent Role="allocation">
+        <PropertyRef Name="management_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_allocation_student">
+    <End Role="student" Type="Self.student" Multiplicity="1" />
+    <End Role="allocation" Type="Self.allocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="student">
+        <PropertyRef Name="student_id" />
+      </Principal>
+      <Dependent Role="allocation">
+        <PropertyRef Name="student_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="LMSEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="allocations" EntityType="Self.allocation" />
+    <EntitySet Name="books" EntityType="Self.book" />
+    <EntitySet Name="managements" EntityType="Self.management" />
+    <EntitySet Name="students" EntityType="Self.student" />
+    <AssociationSet Name="FK_allocation_book" Association="Self.FK_allocation_book">
+      <End Role="book" EntitySet="books" />
+      <End Role="allocation" EntitySet="allocations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_allocation_management" Association="Self.FK_allocation_management">
+      <End Role="management" EntitySet="managements" />
+      <End Role="allocation" EntitySet="allocations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_allocation_student" Association="Self.FK_allocation_student">
+      <End Role="student" EntitySet="students" />
+      <End Role="allocation" EntitySet="allocations" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

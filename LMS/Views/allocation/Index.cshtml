@@ -1,0 +1,59 @@
+﻿@model IEnumerable<LMS.Models.allocation>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.allocation_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.book.book_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.management.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.student.name)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.allocation_date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.book.book_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.management.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.student.name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.allocation_id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.allocation_id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.allocation_id })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<button>
+    @Html.ActionLink("Create New", "Create")
+</button>
+
+<br>
+<button>@Html.ActionLink("Logout", "logout")</button>
+@*<h2>@ViewBag.ab</h2>
+
+<h3>@ViewBag.sum</h3>*@

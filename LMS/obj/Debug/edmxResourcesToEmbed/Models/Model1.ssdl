@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="allocation">
+    <Key>
+      <PropertyRef Name="allocation_id" />
+    </Key>
+    <Property Name="allocation_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="management_id" Type="int" Nullable="false" />
+    <Property Name="student_id" Type="int" Nullable="false" />
+    <Property Name="book_id" Type="int" Nullable="false" />
+    <Property Name="allocation_date" Type="date" />
+  </EntityType>
+  <EntityType Name="book">
+    <Key>
+      <PropertyRef Name="book_id" />
+    </Key>
+    <Property Name="book_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="book_name" Type="nchar" MaxLength="100" />
+    <Property Name="author_name" Type="nchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="management">
+    <Key>
+      <PropertyRef Name="management_id" />
+    </Key>
+    <Property Name="management_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nchar" MaxLength="100" />
+    <Property Name="email" Type="nchar" MaxLength="100" />
+    <Property Name="phone_no" Type="nchar" MaxLength="100" />
+    <Property Name="user_name" Type="nchar" MaxLength="100" />
+    <Property Name="password" Type="nchar" MaxLength="100" />
+    <Property Name="confirm_password" Type="nchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="student">
+    <Key>
+      <PropertyRef Name="student_id" />
+    </Key>
+    <Property Name="student_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nchar" MaxLength="100" />
+    <Property Name="roll_no" Type="nchar" MaxLength="100" />
+    <Property Name="email" Type="nchar" MaxLength="100" />
+  </EntityType>
+  <Association Name="FK_allocation_book">
+    <End Role="book" Type="Self.book" Multiplicity="1" />
+    <End Role="allocation" Type="Self.allocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="book">
+        <PropertyRef Name="book_id" />
+      </Principal>
+      <Dependent Role="allocation">
+        <PropertyRef Name="book_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_allocation_management">
+    <End Role="management" Type="Self.management" Multiplicity="1" />
+    <End Role="allocation" Type="Self.allocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="management">
+        <PropertyRef Name="management_id" />
+      </Principal>
+      <Dependent Role="allocation">
+        <PropertyRef Name="management_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_allocation_student">
+    <End Role="student" Type="Self.student" Multiplicity="1" />
+    <End Role="allocation" Type="Self.allocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="student">
+        <PropertyRef Name="student_id" />
+      </Principal>
+      <Dependent Role="allocation">
+        <PropertyRef Name="student_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="LMSModelStoreContainer">
+    <EntitySet Name="allocation" EntityType="Self.allocation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="book" EntityType="Self.book" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="management" EntityType="Self.management" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="student" EntityType="Self.student" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_allocation_book" Association="Self.FK_allocation_book">
+      <End Role="book" EntitySet="book" />
+      <End Role="allocation" EntitySet="allocation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_allocation_management" Association="Self.FK_allocation_management">
+      <End Role="management" EntitySet="management" />
+      <End Role="allocation" EntitySet="allocation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_allocation_student" Association="Self.FK_allocation_student">
+      <End Role="student" EntitySet="student" />
+      <End Role="allocation" EntitySet="allocation" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

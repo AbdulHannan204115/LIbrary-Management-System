@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<style>
+    button:hover{
+        background-color:brown;
+    }
+    .back {
+        background-image: url("images/pic1.jfif");
+        background-repeat: no-repeat;
+        width: 62%;
+        height: 150%;
+        background-color: burlywood;
+        background-size: cover;
+        padding-right:40%;
+        
+    }
+</style>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+<body style="background-color:burlywood">
+    <div align="center" style="height:500px">
+        <div align="center"  class="back">
+            <br>    <br>    <br>
+                            <h1 style="color:black">Login Page for LMS</h1>
+
+            @using (Html.BeginForm())
+            {
+
+            <h1 style="margin-top:15%; text-size-adjust:auto;">
+                Login: @Html.TextBox("name")
+                @Html.ValidationMessage("name", new { @class = "text-danger" })
+            </h1>
+            <h1 style="margin-left:3%;">
+                password: @Html.Password("pass")
+                @Html.ValidationMessage("pass", new { @class = "text-danger" })
+            </h1>
+           <button  style="background-color:antiquewhite;border:solid;border-color:bisque">Submit</button>
+            }
+
+        </div>
+        
+    </div>
+        <div>
+            @RenderBody()
+        </div>
+    
+</body>
+</html>
